@@ -15,7 +15,7 @@ public class AppTest {
     }
 
     @Test
-    void test(){
+    void testNoIsAnagram(){
         boolean result = App.isAnagram("hola", "colaa");
         assertFalse(result);
     }
