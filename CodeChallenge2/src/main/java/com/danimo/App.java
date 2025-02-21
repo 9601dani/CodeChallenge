@@ -1,31 +1,32 @@
 package com.danimo;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println("Hello World!");
+public class App {
+    public LinkedList<Object> lista;
+
+    public App() {
+        this.lista = new LinkedList<>();
     }
 
-    public static Object[] convertToArray(Object[] a){
-        // El algoritmo que pensaba era mediante un metodo recursivo, para tener un O(n)
-        Object[] result = new Object[]{};
-        
-        for(Object o : a){    
-            if(o.getClass().isInstance(Object[].class)){
-                Object n1 = convertToArray(((Object[])o));
-                result = new Object[]{result, n1};
-            }else{
-                Object n1 = o;
-                result = new Object[]{result, n1};
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+
+        Object[] a = new Object[]{1, 2, new Object[]{"3", "4"}};
+
+        App app = new App();
+        app.convertToArray(a);
+
+        System.out.println(app.lista);
+    }
+
+    public void convertToArray(Object[] a) {
+        for (Object o : a) {
+            if (o instanceof Object[]) {
+                convertToArray((Object[]) o);
+            } else {
+                lista.add(o);
             }
         }
-        return result;
     }
 }
