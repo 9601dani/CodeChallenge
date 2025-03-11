@@ -28,7 +28,7 @@ public class DepartmentTest {
     void testPrintStudent(){
         String result = department.printStudents();
 
-        String resultExpected = "Erick Xicara 61\nDaniel Morales 70";
+        String resultExpected = "Erick Xicara 61\nDaniel Morales 70\n";
 
         assertEquals(resultExpected, result);
     }
