@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -19,6 +20,7 @@ import org.mockito.MockitoAnnotations;
 import com.example.demo.dto.DriverDTO;
 import com.example.demo.dto.DriverRequest;
 import com.example.demo.exeption.NotSavedException;
+import com.example.demo.exeption.NotUpdateException;
 import com.example.demo.model.Driver;
 import com.example.demo.repository.DriverRepository;
 
@@ -108,5 +110,44 @@ public class DriverServiceTest {
         assertEquals("updated name", updatedDriver.name());
         assertEquals(25, updatedDriver.age());
         verify(driverRepository).save(any(Driver.class));
+    }
+
+    @Test
+    void shouldDeleteADriver() {
+        // Given
+        Driver driver = new Driver(1, "test name", 25);
+
+        // When
+        when(this.driverRepository.findById(1)).thenReturn(Optional.of(driver));
+        when(this.driverRepository.save(any(Driver.class))).thenReturn(driver);
+        
+        
+        DriverDTO expected = new DriverDTO(driver);
+
+        DriverDTO actual = this.driverService.deleteDriver(1);
+
+        // Then
+        assertEquals(expected, actual);
+
+
+    }
+
+    @Test
+    void shouldNotFindIdToDelete() {
+
+        // When
+        when(this.driverRepository.findById(1)).thenReturn(Optional.empty());
+
+        Exception exception = assertThrows(NotUpdateException.class, () -> {
+            this.driverService.deleteDriver(1);
+        });
+
+        String expectedMessage = "Driver not found";
+        String actualMessage = exception.getMessage();
+
+        // Then
+        assertEquals(expectedMessage, actualMessage);
+
+
     }
 }

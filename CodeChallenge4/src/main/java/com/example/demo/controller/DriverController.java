@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/api/driver")
+@RequestMapping("/api/v1/driver")
 @AllArgsConstructor
 @Getter
 @Setter
@@ -50,11 +51,19 @@ public class DriverController {
         return ResponseEntity.status(HttpStatus.OK).body(listDriver);
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<DriverDTO> putMethodName(@PathVariable Integer id, @RequestBody DriverRequest request) {
         DriverDTO driverDTO = this.driverService.updateDriver(id, request);
         return ResponseEntity.status(HttpStatus.OK).body(driverDTO);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteDriver(@PathVariable Integer id){
+        this.driverService.deleteDriver(id);
+        return ResponseEntity.noContent().build();
+    }
+    
+    
     
     
     

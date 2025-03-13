@@ -60,5 +60,19 @@ public class DriverService {
         return driver.stream().map(DriverDTO::new).toList();
     }
 
+    public DriverDTO deleteDriver(Integer id) {
+        Optional<Driver> driverOptional = this.driverRepository.findById(id);
+
+        if(driverOptional.isEmpty()) {
+            throw new NotUpdateException("Driver not found");
+        }
+
+        Driver driver = driverOptional.get();
+
+        Driver driverDeleted = this.driverRepository.save(driver);
+
+        return new DriverDTO(driverDeleted);
+    } 
+
 
 }
