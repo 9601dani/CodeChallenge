@@ -75,6 +75,36 @@ public class DriverServiceTest {
         
     }
 
+
+    /*
+    * si se repite en varias pruebas se puede hacer un metodo para no tener codigo repetido
+    el captor se evalua que si tenga los metodos correctos (nombre correcto y edad correcta ) que vienen del DTO
+    
+    Test Created Driver When name duplicated
+     * @Test
+     * void testCreatedDriverWhenNameDuplicated() throws Exception{
+     *  // ARRANGE
+     *  NewDriverRequestDTO dto = new NewDriverRequestDTO(
+     *      DRIVER_NAME, DRIVER_AGE 
+     *  )
+     * 
+     *  when(driverRespository.existByName(DRIVER_NAME))
+     *      .thenReturn(true);
+     * 
+     *  // ASSERT
+     *  assertThrows(DuplicatedEntiryException.class, () -> serviceToTest.createDriver(dto));
+     *  // captura la exception y la devuelve o tambien:
+     * 
+     * DuplicatedEntityException ex =assertThrows(DuplicatedEntiryException.class, () -> serviceToTest.createDriver(dto));
+     *  
+     * assertEquals(EXEPTION_MESSAGE , ex.getMessage()); // opcional dependiendo de los criterios
+     * 
+     * // aqui se ejecutara un verify para ver que por ninguna circunstancia se ejecute el save
+     * verify(driverRepository, times(0)).save(any(Driver.class));
+     * 
+     * }
+     */
+
     @Test 
     void shouldFindAll() {
         //Given

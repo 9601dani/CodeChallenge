@@ -1,0 +1,10 @@
+
+Resumen:
+
+Patron Builder para crear pedidos flexibles, que se van a ir contruyendo el plato, la bebida y los extras de la orden
+
+Patron Strategy para poder aplicar descuentos, al final sera un descuento pero habran distintas "estrategias" para poder aplicarlo
+
+Patron Command para el control de los pedidos porque asi el perdido entra a la cola hasta que este listo, el pedido contiene toda la informacion relevante para generar el pedido en vez de ir preparando parte por parte 
+
+Patron adapter para la comunicacion con la cocina que sera el "el cliente" que nuestra aplicacion despachara, nosotros manejamos el xml y lo pasaremos al json 
